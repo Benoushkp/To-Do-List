@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign In</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: url('time-3933688_1280.jpg') no-repeat center center/cover;
+            flex-direction: column;
+            overflow: hidden;
+        }
+        .container {
+            background: rgba(0, 0, 0, 0.8);
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px cyan;
+            text-align: center;
+            backdrop-filter: blur(10px);
+            animation: fadeIn 1.5s ease-in-out;
+            border: 2px solid cyan;
+            width: 300px;
+        }
+        .title {
+            color: rgb(255, 255, 255);
+            font-size: 35px;
+            font-family: 'Times New Roman', Times, serif;
+            font-weight: bold;
+            text-shadow: 0 0 10px cyan;
+        }
+        input, button {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            margin-left: -9px;
+            border: none;
+            border-radius: 5px;
+        }
+        .btn {
+            background: cyan;
+            color: black;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 0 10px cyan;
+        }
+        .btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 20px cyan;
+        }
+        .link {
+            color: cyan;
+            text-decoration: none;
+        }
+        .link:hover {
+            text-decoration: underline;
+        }
+        .forgot-password {
+            color: cyan;
+            text-decoration: none;
+            display: block;
+            margin-top: 10px;
+        }
+        .forgot-password:hover {
+            text-decoration: underline;
+        }
+        .account-text {
+            color: white;
+            margin-top: 10px;
+        }
+        .signup-link {
+            color: cyan;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .signup-link:hover {
+            text-decoration: underline;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="title">🔐 Sign In</h1>
+        <form id="signInForm">
+            <input type="email" id="email" placeholder="Enter Email" required>
+            <input type="password" id="password" placeholder="Enter Password" required>
+            <button type="submit" class="btn">Sign In</button>
+        </form>
+        <a href="forgot-password.html" class="forgot-password">Forgot Password?</a>
+        <p class="account-text">Don't have an account? <a href="register.html" class="signup-link">Sign Up</a></p>
+    </div>
+    <script>
+        document.getElementById("signInForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+            
+            // Simulated user data (Replace this with actual authentication logic)
+            const correctEmail = "user@example.com";
+            const correctPassword = "password123";
+
+            const email = document.getElementById("email").value;
+            const password = document.getElementById("password").value;
+
+            if (email === correctEmail && password === correctPassword) {
+                window.location.href = "ToDoList.html"; // Redirect to To-Do List if correct
+            } else {
+                window.location.href = "forgot-password.html"; // Redirect to Forgot Password if incorrect
+            }
+        });
+    </script>
+</body>
+</html>

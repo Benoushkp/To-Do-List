@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: url('time-3933688_1280.jpg') no-repeat center center/cover;
+            flex-direction: column;
+            overflow: hidden;
+        }
+        .container {
+            background: rgba(0, 0, 0, 0.8);
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px cyan;
+            text-align: center;
+            backdrop-filter: blur(10px);
+            animation: fadeIn 1.5s ease-in-out;
+            border: 2px solid cyan;
+            width: 300px;
+        }
+        .title {
+            color: rgb(255, 255, 255);
+            font-size: 35px;
+            font-family: 'Times New Roman', Times, serif;
+            font-weight: bold;
+            align-items: center;
+            text-shadow: 0 0 10px cyan;
+        }
+        input, button {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            margin-left: -9px;
+            border: none;
+            border-radius: 5px;
+        }
+        .btn {
+            background: cyan;
+            color: black;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 0 10px cyan;
+        }
+        .btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 20px cyan;
+        }
+        .link {
+            color: cyan;
+            text-decoration: none;
+        }
+        .link:hover {
+            text-decoration: underline;
+        }
+        .account-text {
+            color: lightgray;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="title">🚀 Sign Up</h1>
+        <form id="registerForm">
+            <input type="text" id="username" placeholder="Enter Username" required>
+            <input type="email" id="email" placeholder="Enter Email" required>
+            <input type="password" id="password" placeholder="Enter Password" required>
+            <button type="submit" class="btn">Register</button>
+        </form>
+        <p class="account-text">Already have an account? <a href="signin.html" class="link">Sign In</a></p>
+    </div>
+    <script>
+        document.getElementById("registerForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+            window.location.href = "ToDoList.html"; // Redirects to To-Do List page
+        });
+    </script>
+</body>
+</html>

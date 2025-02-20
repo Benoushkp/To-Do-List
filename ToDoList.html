@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do List</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1 class="title">📌 TO-DO LIST</h1>
+        <div class="input-group">
+            <input type="text" id="taskInput" placeholder="Enter task">
+            <input type="datetime-local" id="taskTime">
+            <button onclick="addTask()" class="btn">Add</button>
+        </div>
+        <table>
+            <thead>
+                <tr>
+                    <th>Task</th>
+                    <th>Time</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody id="taskList"></tbody>
+        </table>
+        <div id="currentTime"></div>
+
+        <!-- BS CREATIONS Text with Glowing Effect -->
+        <h2 class="bs-creations">BS CREATIONS</h2>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            loadTasks();
+            setInterval(checkAlarms, 60000);
+            updateTime();
+            setInterval(updateTime, 1000);
+        });
+
+        function updateTime() {
+            const now = new Date();
+            document.getElementById("currentTime").innerText = `Current Time: ${now.toLocaleString()}`;
+        }
+
+        function addTask() {
+            const taskInput = document.getElementById("taskInput");
+            const taskTime = document.getElementById("taskTime");
+            if (taskInput.value.trim() === "" || taskTime.value === "") return;
+
+            const task = {
+                text: taskInput.value,
+                time: taskTime.value,
+                completed: false
+            };
+
+            let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+            tasks.push(task);
+            localStorage.setItem("tasks", JSON.stringify(tasks));
+            taskInput.value = "";
+            taskTime.value = "";
+            loadTasks();
+        }
+
+        function loadTasks() {
+            const taskList = document.getElementById("taskList");
+            taskList.innerHTML = "";
+            let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+            tasks.forEach((task, index) => {
+                const row = document.createElement("tr");
+                row.classList.add("task-row");
+                row.innerHTML = `<td class="${task.completed ? 'completed' : ''}">${task.text}</td>
+                                 <td>${task.time}</td>
+                                 <td>
+                                     <button onclick="completeTask(${index})" class="btn btn-complete">✔</button>
+                                     <button onclick="deleteTask(${index})" class="btn btn-delete">❌</button>
+                                 </td>`;
+                taskList.appendChild(row);
+            });
+        }
+
+        function completeTask(index) {
+            let tasks = JSON.parse(localStorage.getItem("tasks"));
+            tasks[index].completed = !tasks[index].completed;
+            localStorage.setItem("tasks", JSON.stringify(tasks));
+            loadTasks();
+        }
+
+        function deleteTask(index) {
+            let tasks = JSON.parse(localStorage.getItem("tasks"));
+            tasks.splice(index, 1);
+            localStorage.setItem("tasks", JSON.stringify(tasks));
+            loadTasks();
+        }
+
+        function checkAlarms() {
+            let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+            const now = new Date().toISOString().slice(0, 16);
+            tasks.forEach((task) => {
+                if (task.time === now && !task.completed) {
+                    new Audio("alarm.mp3").play();
+                    alert(`Task Due: ${task.text}`);
+                }
+            });
+        }
+    </script>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: url('ultra HD image blending nature with computers for a to-do list (1).png') no-repeat center center/cover;
+            flex-direction: column;
+            overflow: hidden;
+        }
+        .title {
+            color: rgb(255, 255, 255);
+            font-size: 35px;
+            font-family: 'Times New Roman', Times, serif;
+            font-weight: bold;
+            align-items: center;
+            text-shadow: 0 0 10px cyan;
+        }
+        .container {
+            background: rgba(0, 0, 0, 0.8);
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 0 15px cyan;
+            text-align: center;
+            backdrop-filter: blur(10px);
+            animation: fadeIn 1.5s ease-in-out;
+            border: 2px solid cyan;
+        }
+        .input-group {
+            display: flex;
+            gap: 10px;
+        }
+        input, button {
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+        }
+        .btn {
+            background: cyan;
+            color: black;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 0 10px cyan;
+        }
+        .btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 20px cyan;
+        }
+        .task-row {
+            transition: all 0.3s ease-in-out;
+        }
+        .task-row:hover {
+            background: rgba(0, 255, 255, 0.3);
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            padding: 10px;
+            border: 1px solid cyan;
+            text-align: left;
+            color: white;
+        }
+        th {
+            background-color: rgba(0, 255, 255, 0.3);
+        }
+        .completed {
+            text-decoration: line-through;
+            color: lightgray;
+        }
+        #currentTime {
+            margin-top: 20px;
+            font-size: 18px;
+            font-weight: bold;
+            color: cyan;
+            animation: blink 1s infinite alternate;
+        }
+
+        /* BS CREATIONS Glowing Effect */
+        .bs-creations {
+            font-size: 20px;
+            font-weight: bold;
+            color: cyan;
+            text-shadow: 0 0 10px cyan, 0 0 20px blue;
+            margin-top: 10px;
+            opacity: 0;
+            animation: fadeInGlow 2s ease-in-out forwards;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes blink {
+            from { opacity: 1; }
+            to { opacity: 0.5; }
+        }
+        @keyframes fadeInGlow {
+            0% { opacity: 0; transform: scale(0.8); }
+            100% { opacity: 1; transform: scale(1); text-shadow: 0 0 15px cyan, 0 0 30px blue; }
+        }
+    </style>
+</body>
+</html>
