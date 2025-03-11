@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Welcome - ToDo App</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    /* Use a background similar to your other pages */
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background: url('time-3933688_1280.jpg') no-repeat center center/cover;
+      flex-direction: column;
+      overflow: hidden;
+    }
+    /* Container styling for consistency */
+    .container {
+      background: rgba(0, 0, 0, 0.8);
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 0 15px cyan;
+      text-align: center;
+      backdrop-filter: blur(10px);
+      border: 2px solid cyan;
+      width: 300px;
+    }
+    .title {
+      color: white;
+      font-size: 32px;
+      font-weight: bold;
+      margin-bottom: 20px;
+      text-shadow: 0 0 10px cyan;
+    }
+    .btn {
+      background: cyan;
+      color: black;
+      padding: 10px;
+      margin: 10px 0;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: transform 0.3s, box-shadow 0.3s;
+      width: 100%;
+      box-shadow: 0 0 10px cyan;
+    }
+    .btn:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 20px cyan;
+    }
+    .link {
+      color: cyan;
+      text-decoration: none;
+      display: block;
+      margin-top: 15px;
+    }
+    .link:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1 class="title">Welcome</h1>
+    <p style="color: lightgray;">Please sign in or register to continue</p>
+    <a href="signin.html"><button class="btn">Sign In</button></a>
+    <a href="register.html"><button class="btn">Register</button></a>
+  </div>
+</body>
+</html>
